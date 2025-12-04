@@ -1,0 +1,373 @@
+.token-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 表格容器 - 恢复毛玻璃质感 */
+.token-table-container {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: visible; /* 允许下拉菜单溢出 */
+}
+
+.token-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 4px; /* 行之间增加间距 */
+  font-size: 13px;
+}
+
+.token-table thead {
+  background: transparent;
+}
+
+.token-table th {
+  padding: 12px 20px;
+  text-align: left;
+  font-weight: 600;
+  color: #86868b;
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  border: none;
+}
+
+.token-table tbody tr {
+  background: rgba(255, 255, 255, 0.5);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+/* 悬停效果 */
+.token-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.005); /* 微妙的放大 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  z-index: 1;
+  position: relative;
+}
+
+/* 圆角处理 */
+.token-table tbody tr td:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.token-table tbody tr td:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/* 激活状态 - 更柔和的蓝色光晕 */
+.token-table tbody tr.active {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 0 0 2px #007AFF,
+    0 8px 20px rgba(0, 122, 255, 0.15);
+  z-index: 2;
+  position: relative;
+}
+
+.token-table tbody tr.active:hover {
+  background: #ffffff;
+}
+
+/* 刷新失败状态 - 红色边框 */
+.token-table tbody tr.refresh-failed {
+  background: rgba(254, 242, 242, 0.8);
+  border-left: 3px solid #ef4444;
+}
+
+.token-table tbody tr.refresh-failed:hover {
+  background: rgba(254, 242, 242, 0.95);
+}
+
+.token-table td {
+  padding: 16px 20px;
+  vertical-align: middle;
+  color: #1d1d1f;
+  border: none; /* 移除边框，使用阴影分隔 */
+}
+
+/* 列宽优化 */
+.col-name { width: 28%; }
+.col-plan { width: 12%; }
+.col-quota { width: 15%; }
+.col-usage { width: 20%; }
+.col-expiry { width: 15%; }
+.col-actions { width: 10%; }
+
+/* 账号名称单元格 */
+.token-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.token-name-text {
+  font-weight: 600;
+  color: #1d1d1f;
+  font-size: 14px;
+}
+
+/* 用量单元格 */
+.usage-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.usage-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 3px;
+  overflow: hidden;
+  min-width: 60px;
+}
+
+.usage-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #007AFF, #00C7BE);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 3px;
+}
+
+.usage-percentage-text {
+  font-size: 12px;
+  color: #86868b;
+  font-weight: 500;
+  min-width: 45px;
+  text-align: right;
+}
+
+/* 到期时间单元格 */
+.expiry-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.expiry-date-text {
+  font-weight: 500;
+  color: #1d1d1f;
+  font-size: 13px;
+}
+
+/* 操作按钮区 */
+.token-item-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  position: relative;
+}
+
+.token-table tbody tr:hover .token-item-actions,
+.token-table tbody tr.active .token-item-actions {
+  opacity: 1;
+}
+
+/* 按钮样式优化 */
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 16px;
+  color: #555;
+}
+
+.btn-icon:hover, .btn-icon.active {
+  background: rgba(0, 0, 0, 0.05);
+  color: #000;
+}
+
+.btn-icon-text {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 13px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-primary-text {
+  background: #007AFF;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 122, 255, 0.2);
+}
+
+.btn-primary-text:hover {
+  background: #0066D6;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 122, 255, 0.3);
+}
+
+/* 下拉菜单 */
+.action-dropdown-container {
+  position: relative;
+}
+
+.action-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  min-width: 160px;
+  z-index: 100;
+  padding: 6px;
+  animation: dropdown-fade-in 0.2s ease;
+}
+
+@keyframes dropdown-fade-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  color: #333;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.1s;
+}
+
+.dropdown-item:hover {
+  background: #f3f4f6;
+}
+
+.dropdown-item.danger {
+  color: #dc2626;
+}
+
+.dropdown-item.danger:hover {
+  background: #fef2f2;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 4px 0;
+}
+
+/* 徽章样式 */
+.token-badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+}
+
+.active-badge {
+  background: rgba(0, 122, 255, 0.1);
+  color: #007AFF;
+}
+
+.error-badge {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 0.5px solid rgba(239, 68, 68, 0.2);
+  cursor: help;
+}
+
+.plan-badge {
+  background: rgba(142, 142, 147, 0.1);
+  color: #1d1d1f;
+  border: 0.5px solid rgba(0, 0, 0, 0.05);
+}
+
+.plan-badge-trial {
+  background: linear-gradient(135deg, #FF9500 0%, #FF2D55 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 2px 8px rgba(255, 45, 85, 0.25);
+}
+
+/* 剩余天数标签优化 */
+.days-remaining {
+  font-size: 11px;
+  color: #FF3B30;
+  font-weight: 600;
+  padding: 2px 8px;
+  background: rgba(255, 59, 48, 0.1);
+  border-radius: 12px; /* 胶囊形状 */
+  white-space: nowrap;
+  display: inline-block;
+  border: 1px solid rgba(255, 59, 48, 0.1);
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+  color: #86868b;
+}
+
+.empty-state-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .token-table-container {
+    padding: 12px;
+    overflow-x: auto;
+  }
+  
+  .token-table {
+    min-width: 800px;
+  }
+  
+  .token-table tbody tr td:first-child,
+  .token-table tbody tr td:last-child {
+    border-radius: 0;
+  }
+  
+  .token-table tbody tr {
+    box-shadow: none;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+}

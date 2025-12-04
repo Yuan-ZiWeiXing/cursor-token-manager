@@ -1,0 +1,92 @@
+.title-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: saturate(180%) blur(30px);
+  -webkit-backdrop-filter: saturate(180%) blur(30px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+  -webkit-app-region: drag;
+  user-select: none;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+}
+
+.title-bar-controls {
+  position: absolute;
+  left: 14px;
+  display: flex;
+  gap: 6px;
+  -webkit-app-region: no-drag;
+}
+
+.title-bar-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  padding: 0;
+  font-size: 0;
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.1) inset;
+}
+
+.title-bar-button-icon {
+  display: none;
+}
+
+.title-bar-button.close {
+  background-color: #ff5f57;
+}
+
+.title-bar-button.close:hover {
+  background-color: #ff453a;
+  transform: scale(1.1);
+}
+
+.title-bar-button.minimize {
+  background-color: #ffbd2e;
+}
+
+.title-bar-button.minimize:hover {
+  background-color: #ff9500;
+  transform: scale(1.1);
+}
+
+.title-bar-button.maximize {
+  background-color: #30d158;
+}
+
+.title-bar-button.maximize:hover {
+  background-color: #28cd41;
+  transform: scale(1.1);
+}
+
+.title-bar-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #000000;
+  letter-spacing: -0.1px;
+}
+
+/* Windows系统下的样式调整 */
+@media (prefers-color-scheme: dark) {
+  .title-bar {
+    background: rgba(30, 30, 30, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .title-bar-title {
+    color: #f5f5f7;
+  }
+}
+

@@ -1,0 +1,185 @@
+.token-form-container {
+  padding: 20px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.token-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-label-hint {
+  font-size: 12px;
+  color: #86868b;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1d1d1f;
+}
+
+.form-input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d2d2d7;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.form-input:focus {
+  border-color: #007AFF;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+.form-textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #d2d2d7;
+  font-size: 13px;
+  outline: none;
+  transition: all 0.2s;
+  resize: vertical;
+  min-height: 100px;
+  font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+  line-height: 1.5;
+}
+
+.form-textarea:focus {
+  border-color: #007AFF;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+/* 模式切换 Tab */
+.form-tabs {
+  display: flex;
+  background: #f5f5f7;
+  padding: 4px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.form-tab {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #86868b;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.form-tab.active {
+  background: white;
+  color: #1d1d1f;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* 解析结果区域 */
+.parse-result {
+  background: rgba(0, 122, 255, 0.04);
+  border-radius: 10px;
+  padding: 16px;
+  border-left: 3px solid #007AFF;
+  margin-top: 8px;
+  animation: slide-down 0.3s ease-out;
+}
+
+.parse-result-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.parse-result-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.parse-result-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.parse-result-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.parse-result-item.full-width {
+  grid-column: span 2;
+}
+
+.parse-result-label {
+  font-size: 12px;
+  color: #86868b;
+  font-weight: 500;
+}
+
+.parse-result-value {
+  font-size: 13px;
+  color: #1d1d1f;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.parse-result-value.valid {
+  color: #34C759;
+}
+
+.parse-result-value.expired {
+  color: #FF3B30;
+}
+
+.trial-status {
+  color: #FF9500;
+}
+
+.highlight-warning {
+  color: #FF3B30;
+  font-weight: 600;
+}
+
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
