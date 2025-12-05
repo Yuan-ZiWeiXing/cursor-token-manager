@@ -1,6 +1,6 @@
 {
   "name": "yuan-cursor-manager",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Yuan-cursor账号管理器",
   "main": "dist-electron/main.js",
   "type": "module",

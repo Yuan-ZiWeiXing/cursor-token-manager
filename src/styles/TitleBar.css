@@ -1,9 +1,9 @@
 .title-bar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 52px;
+  height: 40px; /* 调整为与 App.css 中的 padding-top 一致，或者稍高一点覆盖 */
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: saturate(180%) blur(30px);
   -webkit-backdrop-filter: saturate(180%) blur(30px);
@@ -15,6 +15,8 @@
   -webkit-app-region: drag;
   user-select: none;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  border-top-left-radius: 12px; /* 确保标题栏也有圆角 */
+  border-top-right-radius: 12px;
 }
 
 .title-bar-controls {
@@ -23,6 +25,8 @@
   display: flex;
   gap: 6px;
   -webkit-app-region: no-drag;
+  height: 100%; /* 垂直居中 */
+  align-items: center;
 }
 
 .title-bar-button {

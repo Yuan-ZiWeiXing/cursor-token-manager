@@ -5,6 +5,8 @@
   flex-direction: column;
   background: #ffffff;
   overflow: hidden;
+  position: relative; /* 确保子元素的 absolute 定位相对于 app */
+  border-radius: 12px; /* 确保 app 本身也有圆角，配合 index.css */
 }
 
 .app-layout {

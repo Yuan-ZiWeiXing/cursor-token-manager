@@ -74,24 +74,23 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange, tokensCoun
             <span className="nav-label">系统管理</span>
           </button>
         </div>
-      </nav>
 
-      <div className="sidebar-footer">
-        {updateInfo?.hasUpdate ? (
-          <div className="sidebar-update-notice" onClick={handleUpdateClick}>
-            <div className="update-icon">🎉</div>
-            <div className="update-content">
-              <div className="update-title">发现新版本</div>
-              <div className="update-version">{updateInfo.latestVersion}</div>
+        <div className="nav-footer">
+          {updateInfo?.hasUpdate ? (
+            <div className="sidebar-update-notice" onClick={handleUpdateClick}>
+              <div className="update-icon">🎉</div>
+              <div className="update-content">
+                <div className="update-title">发现新版本</div>
+                <div className="update-version">{updateInfo.latestVersion}</div>
+              </div>
             </div>
-          </div>
-        ) : (
-          <div className="sidebar-version">v1.0.0</div>
-        )}
-      </div>
+          ) : (
+            <div className="sidebar-version">v1.0.0</div>
+          )}
+        </div>
+      </nav>
     </div>
   )
 }
 
 export default Sidebar
-

@@ -63,6 +63,8 @@
   flex: 1;
   padding: 16px 12px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .nav-section {
@@ -142,9 +144,10 @@
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
-.sidebar-footer {
-  padding: 16px 20px;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+.nav-footer {
+  margin-top: auto;
+  padding-top: 16px;
+  padding-bottom: 32px; /* 增加底部间距，防止被窗口圆角遮挡 */
   text-align: center;
 }
 
@@ -182,6 +185,8 @@
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s ease;
+  width: 100%; /* 确保占满容器 */
+  box-sizing: border-box; /* 包含 padding */
   box-shadow: 
     0 2px 8px rgba(16, 185, 129, 0.3),
     0 0 0 1px rgba(255, 255, 255, 0.2) inset;
@@ -218,6 +223,8 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+  min-width: 0; /* 关键：防止 flex 子项溢出 */
+  overflow: hidden; /* 确保内容被裁剪 */
 }
 
 .update-title {
@@ -225,12 +232,16 @@
   font-weight: 600;
   color: white;
   line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .update-version {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.8);
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
-
