@@ -85,6 +85,24 @@
   flex: 1;
 }
 
+.usage-details-modal-content::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.usage-details-modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.usage-details-modal-content::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+.usage-details-modal-content::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
 /* 查询区域 */
 .usage-query-section {
   display: flex;
@@ -277,11 +295,11 @@
 
 .usage-events-list::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 .usage-events-list::-webkit-scrollbar-track {
-  background: #f3f4f6;
-  border-radius: 3px;
+  background: transparent;
 }
 
 .usage-events-list::-webkit-scrollbar-thumb {

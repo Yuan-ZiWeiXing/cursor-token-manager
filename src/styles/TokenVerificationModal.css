@@ -632,3 +632,29 @@
   color: #991b1b;
 }
 
+/* 滚动条样式 - macOS 风格 */
+.verification-modal-content::-webkit-scrollbar,
+.results-list::-webkit-scrollbar,
+.template-code::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.verification-modal-content::-webkit-scrollbar-track,
+.results-list::-webkit-scrollbar-track,
+.template-code::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.verification-modal-content::-webkit-scrollbar-thumb,
+.results-list::-webkit-scrollbar-thumb,
+.template-code::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+.verification-modal-content::-webkit-scrollbar-thumb:hover,
+.results-list::-webkit-scrollbar-thumb:hover,
+.template-code::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}

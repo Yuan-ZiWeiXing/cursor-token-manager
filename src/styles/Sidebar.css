@@ -160,6 +160,7 @@
 /* 滚动条样式 - macOS 风格 */
 .sidebar-nav::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 .sidebar-nav::-webkit-scrollbar-track {
@@ -167,12 +168,12 @@
 }
 
 .sidebar-nav::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.15);
+  background: #d1d5db;
   border-radius: 3px;
 }
 
 .sidebar-nav::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.25);
+  background: #9ca3af;
 }
 
 /* 更新提示 */

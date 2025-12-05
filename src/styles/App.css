@@ -25,7 +25,8 @@
 }
 
 .app-main::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 .app-main::-webkit-scrollbar-track {
@@ -33,12 +34,12 @@
 }
 
 .app-main::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
+  background: #d1d5db;
+  border-radius: 3px;
 }
 
 .app-main::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.25);
+  background: #9ca3af;
 }
 
 .btn-primary {

@@ -206,4 +206,23 @@
   line-height: 1.6;
 }
 
+/* 滚动条样式 - macOS 风格 */
+.page-content::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.page-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.page-content::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+.page-content::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
 
