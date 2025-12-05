@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../styles/UsageDetailsModal.css'
 
 interface UsageEvent {
@@ -50,6 +50,15 @@ const UsageDetailsModal: React.FC<UsageDetailsModalProps> = ({
   const [usageData, setUsageData] = useState<UsageDetailsResponse | null>(null)
   const [currentPage, setCurrentPage] = useState(1)
 
+  // 每次弹窗打开时重置数据
+  useEffect(() => {
+    if (show) {
+      setUsageData(null)
+      setSelectedDays(7)
+      setCurrentPage(1)
+    }
+  }, [show, accountName, cookieFormat])
+
   if (!show) return null
 
   const handleFetchUsage = async () => {
@@ -82,7 +91,17 @@ const UsageDetailsModal: React.FC<UsageDetailsModalProps> = ({
       })
 
       if (result.success && result.data) {
-        setUsageData(result.data)
+        // 检查返回的数据结构
+        if (!result.data.usageEventsDisplay || !Array.isArray(result.data.usageEventsDisplay)) {
+          console.warn('API 返回的数据缺少 usageEventsDisplay 字段:', result.data)
+          // 设置为空数组，而不是报错
+          setUsageData({
+            totalUsageEventsCount: 0,
+            usageEventsDisplay: []
+          })
+        } else {
+          setUsageData(result.data)
+        }
       } else {
         onShowDialog({
           title: '查询失败',
@@ -90,6 +109,7 @@ const UsageDetailsModal: React.FC<UsageDetailsModalProps> = ({
           type: 'error',
           onConfirm: () => {}
         })
+        setUsageData(null)
       }
     } catch (error: any) {
       console.error('获取使用详情失败:', error)
@@ -137,9 +157,11 @@ const UsageDetailsModal: React.FC<UsageDetailsModalProps> = ({
 
   // 计算汇总统计
   const getStatistics = () => {
-    if (!usageData) return null
+    if (!usageData || !usageData.usageEventsDisplay || !Array.isArray(usageData.usageEventsDisplay)) {
+      return null
+    }
 
-    const totalRequests = usageData.totalUsageEventsCount
+    const totalRequests = usageData.totalUsageEventsCount || 0
     const totalCost = usageData.usageEventsDisplay.reduce((sum, event) => sum + (event.requestsCosts || 0), 0)
     const totalInputTokens = usageData.usageEventsDisplay.reduce((sum, event) => sum + (event.tokenUsage.inputTokens || 0), 0)
     const totalOutputTokens = usageData.usageEventsDisplay.reduce((sum, event) => sum + (event.tokenUsage.outputTokens || 0), 0)
@@ -273,7 +295,7 @@ const UsageDetailsModal: React.FC<UsageDetailsModalProps> = ({
           {/* 使用详情列表 */}
           {usageData && usageData.usageEventsDisplay.length > 0 ? (
             <div className="usage-events-section">
-              <h4 className="usage-section-title">📝 使用记录 (共 {usageData.totalUsageEventsCount} 条)</h4>
+              <h4 className="usage-section-title">📝 使用记录 (共 {usageData.totalUsageEventsCount || 0} 条)</h4>
               <div className="usage-events-list">
                 {usageData.usageEventsDisplay.map((event, index) => (
                   <div key={index} className="usage-event-item">
@@ -325,12 +347,18 @@ const UsageDetailsModal: React.FC<UsageDetailsModalProps> = ({
                 ))}
               </div>
             </div>
-          ) : usageData ? (
+          ) : usageData && usageData.usageEventsDisplay.length === 0 ? (
             <div className="usage-empty-state">
               <div className="usage-empty-icon">📭</div>
-              <p>该时间段内没有使用记录</p>
+              <h3 style={{ margin: '16px 0 8px', fontSize: '18px', color: '#374151' }}>该时间段内没有使用记录</h3>
+              <p style={{ margin: 0, fontSize: '14px', color: '#6b7280' }}>
+                {selectedDays === 1 ? '最近 1 天' : selectedDays === 7 ? '最近 7 天' : '最近 30 天'}内暂无 API 调用记录
+              </p>
+              <p style={{ margin: '8px 0 0', fontSize: '13px', color: '#9ca3af' }}>
+                尝试选择其他时间范围查询
+              </p>
             </div>
-          ) : !loading && (
+          ) : !loading && !usageData && (
             <div className="usage-empty-state">
               <div className="usage-empty-icon">👆</div>
               <p>请选择时间范围并点击"查询"按钮</p>
