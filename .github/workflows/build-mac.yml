@@ -1,0 +1,42 @@
+name: Build macOS App
+
+on:
+  workflow_dispatch: # 允许在 GitHub Actions 页面手动点击触发
+  push:
+    tags:
+      - 'v*' # 推送 v1.0.0 这样的标签时自动触发
+
+jobs:
+  build-mac:
+    runs-on: macos-latest
+    
+    steps:
+      - name: Check out git repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Compile Source
+        # 分步执行编译，确保不出错
+        run: |
+          npm run electron:compile
+          npm run build
+
+      - name: Build macOS DMG
+        # 使用 electron-builder 构建 mac 目标
+        # --publish never 表示不尝试自动发布到 Release（我们用 actions/upload-artifact 手动传）
+        # -c.mac.identity=null 显式禁用签名，避免寻找证书报错
+        run: npx electron-builder --mac --x64 --arm64 --config.mac.identity=null --publish never
+
+      - name: Upload DMG artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macOS-Installer
+          path: release/*.dmg
