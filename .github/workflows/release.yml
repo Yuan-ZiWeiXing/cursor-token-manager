@@ -59,7 +59,7 @@ jobs:
       # 构建并发布到 GitHub Releases（electron-builder 会自动上传）
       - name: Build and Publish Electron App
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: npm run electron:publish
 
       - name: Upload Artifacts (备份)

@@ -5,9 +5,9 @@
   "description": "Yuan-cursor账号管理器",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Denny-Yuan/cursor-token-manager"
+    "url": "https://github.com/Yuan-ZiWeiXing/cursor-token-manager"
   },
-  "homepage": "https://github.com/Denny-Yuan/cursor-token-manager",
+  "homepage": "https://github.com/Yuan-ZiWeiXing/cursor-token-manager",
   "main": "dist-electron/main.js",
   "type": "module",
   "scripts": {
@@ -54,7 +54,7 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "Denny-Yuan",
+        "owner": "Yuan-ZiWeiXing",
         "repo": "cursor-token-manager"
       }
     ],
