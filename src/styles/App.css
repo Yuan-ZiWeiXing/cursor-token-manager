@@ -52,17 +52,27 @@
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   letter-spacing: -0.2px;
   border: none;
+  cursor: pointer;
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   transform: none;
   background: #006be0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-.btn-primary:active {
+.btn-primary:active:not(:disabled) {
   background: #0051a8;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:disabled {
+  background: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .btn-secondary {
@@ -76,19 +86,30 @@
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
   letter-spacing: -0.1px;
+  cursor: pointer;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover:not(:disabled) {
   background: #ffffff;
   border-color: rgba(0, 0, 0, 0.2);
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
-.btn-secondary:active {
+.btn-secondary:active:not(:disabled) {
   background: #f5f5f7;
   transform: translateY(0);
   box-shadow: none;
+}
+
+.btn-secondary:disabled {
+  background: #f5f5f7;
+  color: #9ca3af;
+  border-color: #e5e7eb;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .btn-danger {
@@ -101,9 +122,10 @@
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid transparent;
   letter-spacing: -0.1px;
+  cursor: pointer;
 }
 
-.btn-danger:hover {
+.btn-danger:hover:not(:disabled) {
   background: #FF3B30;
   color: #ffffff;
   transform: translateY(-1px);
@@ -111,9 +133,17 @@
   box-shadow: 0 4px 12px rgba(255, 59, 48, 0.3);
 }
 
-.btn-danger:active {
+.btn-danger:active:not(:disabled) {
   transform: translateY(0);
   background: #d70015;
+}
+
+.btn-danger:disabled {
+  color: #9ca3af;
+  border-color: transparent;
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .btn-sm {

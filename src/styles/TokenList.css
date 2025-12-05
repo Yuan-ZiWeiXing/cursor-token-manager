@@ -194,9 +194,16 @@
   color: #555;
 }
 
-.btn-icon:hover, .btn-icon.active {
+.btn-icon:hover:not(:disabled), .btn-icon.active {
   background: rgba(0, 0, 0, 0.05);
   color: #000;
+}
+
+.btn-icon:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+  color: #9ca3af;
 }
 
 .btn-icon-text {
@@ -214,16 +221,28 @@
   white-space: nowrap;
 }
 
+.btn-icon-text:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .btn-primary-text {
   background: #007AFF;
   color: white;
   box-shadow: 0 2px 4px rgba(0, 122, 255, 0.2);
 }
 
-.btn-primary-text:hover {
+.btn-primary-text:hover:not(:disabled) {
   background: #0066D6;
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(0, 122, 255, 0.3);
+}
+
+.btn-primary-text:disabled {
+  background: #d1d5db;
+  color: #9ca3af;
+  box-shadow: none;
 }
 
 /* 下拉菜单 */

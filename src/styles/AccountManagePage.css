@@ -82,7 +82,7 @@
     0 0 0 1px rgba(255, 255, 255, 0.1) inset;
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   box-shadow: 
     0 4px 12px rgba(59, 130, 246, 0.4),
@@ -90,8 +90,17 @@
   transform: translateY(-1px);
 }
 
-.btn-primary:active {
+.btn-primary:active:not(:disabled) {
   transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  background: #d1d5db;
+  color: #9ca3af;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .btn-secondary {
@@ -101,15 +110,25 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover:not(:disabled) {
   background: #f9fafb;
   border-color: rgba(0, 0, 0, 0.18);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
   transform: translateY(-1px);
 }
 
-.btn-secondary:active {
+.btn-secondary:active:not(:disabled) {
   transform: translateY(0);
+}
+
+.btn-secondary:disabled {
+  background: #f5f5f7;
+  color: #9ca3af;
+  border-color: #e5e7eb;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .btn-danger-outline {
@@ -129,16 +148,26 @@
   box-shadow: 0 1px 2px rgba(220, 38, 38, 0.1);
 }
 
-.btn-danger-outline:hover {
+.btn-danger-outline:hover:not(:disabled) {
   background: #fee2e2;
   border-color: #ef4444;
   box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);
   transform: translateY(-1px);
 }
 
-.btn-danger-outline:active {
+.btn-danger-outline:active:not(:disabled) {
   transform: translateY(0);
   background: #fecaca;
+}
+
+.btn-danger-outline:disabled {
+  background: #f5f5f7;
+  color: #9ca3af;
+  border-color: #e5e7eb;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 /* 分页 */
