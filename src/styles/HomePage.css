@@ -265,6 +265,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .author-info {
@@ -317,6 +319,50 @@
 .author-info:hover .copy-icon {
   opacity: 1;
   transform: scale(1.1);
+}
+
+/* GitHub 链接 */
+.github-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #6b7280;
+  background: white;
+  padding: 12px 24px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.github-link:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  border-color: #6366f1;
+  background: #f5f3ff;
+}
+
+.github-link:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.github-icon {
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+
+.github-link:hover .github-icon {
+  transform: scale(1.1);
+}
+
+.github-text {
+  font-weight: 600;
+  color: #6366f1;
+  letter-spacing: 0.5px;
 }
 
 

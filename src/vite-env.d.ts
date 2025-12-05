@@ -1,5 +1,27 @@
 /// <reference types="vite/client" />
 
+declare module '*/package.json' {
+  interface PackageJson {
+    name: string
+    version: string
+    releaseDate?: string
+    description: string
+    repository?: {
+      type: string
+      url: string
+    }
+    homepage?: string
+    publish?: Array<{
+      provider: string
+      owner: string
+      repo: string
+    }>
+    [key: string]: any
+  }
+  const value: PackageJson
+  export default value
+}
+
 interface Window {
   electronAPI: {
     getTokens: () => Promise<any[]>

@@ -10,7 +10,6 @@ import TokenFormModal from './components/TokenFormModal'
 import Dialog from './components/Dialog'
 import ProgressModal from './components/ProgressModal'
 import RefreshLogModal from './components/RefreshLogModal'
-import UpdateNotification from './components/UpdateNotification'
 import './styles/App.css'
 
 export interface Token {
@@ -89,7 +88,6 @@ function App() {
 
   // 更新检测状态
   const [updateInfo, setUpdateInfo] = useState<{
-    show: boolean
     hasUpdate: boolean
     currentVersion?: string
     latestVersion?: string
@@ -97,7 +95,6 @@ function App() {
     releaseNotes?: string
     manualDownload?: boolean
   }>({
-    show: false,
     hasUpdate: false
   })
   
@@ -153,7 +150,6 @@ function App() {
       const cleanupUpdateAvailable = window.electronAPI.onUpdateAvailable?.((info) => {
         console.log('发现新版本:', info)
         setUpdateInfo({
-          show: true,
           hasUpdate: true,
           currentVersion: info.currentVersion,
           latestVersion: `v${info.version}`,
@@ -281,7 +277,6 @@ function App() {
         const result = await window.electronAPI.checkForUpdates()
         if (result.success && result.hasUpdate) {
           setUpdateInfo({
-            show: true,
             hasUpdate: true,
             currentVersion: result.currentVersion,
             latestVersion: result.latestVersion,
@@ -1172,20 +1167,6 @@ function App() {
         logs={refreshLogModal.logs}
         progress={refreshLogModal.progress}
         onClose={handleCloseRefreshLog}
-      />
-      
-      <UpdateNotification
-        show={updateInfo.show}
-        currentVersion={updateInfo.currentVersion || ''}
-        latestVersion={updateInfo.latestVersion || ''}
-        releaseNotes={updateInfo.releaseNotes}
-        releaseUrl={updateInfo.releaseUrl}
-        manualDownload={updateInfo.manualDownload}
-        onClose={() => setUpdateInfo(prev => ({ ...prev, show: false }))}
-        onUpdate={() => {
-          // 如果是手动下载模式，onUpdate 会打开浏览器
-          // 如果是自动更新模式，onUpdate 会触发下载
-        }}
       />
     </div>
   )

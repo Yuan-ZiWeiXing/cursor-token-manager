@@ -1,5 +1,6 @@
 import { Token } from '../App'
 import '../styles/HomePage.css'
+import packageJson from '../../package.json'
 
 interface HomePageProps {
   tokens: Token[]
@@ -50,6 +51,14 @@ const HomePage: React.FC<HomePageProps> = ({
     }).catch(err => {
       console.error('复制失败:', err)
     })
+  }
+
+  // 打开 GitHub 仓库
+  const handleOpenGitHub = () => {
+    const repoUrl = packageJson.repository?.url || packageJson.homepage
+    if (repoUrl) {
+      window.open(repoUrl, '_blank')
+    }
   }
 
   return (
@@ -171,6 +180,10 @@ const HomePage: React.FC<HomePageProps> = ({
           <span className="author-label">作者：</span>
           <span className="author-contact">Q：1400700713</span>
           <span className="copy-icon">📋</span>
+        </div>
+        <div className="github-link" onClick={handleOpenGitHub} title="觉得好用？给个 Star ⭐ 吧">
+          <span className="github-icon">⭐</span>
+          <span className="github-text">GitHub</span>
         </div>
       </div>
       </div>

@@ -350,6 +350,76 @@
   border-radius: 50%;
 }
 
+/* GitHub Release Notes 样式 */
+.loading-release {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+}
+
+.loading-spinner {
+  font-size: 32px;
+  margin-bottom: 12px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.release-notes {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.8;
+}
+
+.release-heading-2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 16px 0;
+  padding-top: 8px;
+}
+
+.release-heading-3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+  margin: 16px 0 12px 0;
+}
+
+.release-list-item {
+  font-size: 14px;
+  color: #374151;
+  line-height: 2;
+  position: relative;
+  padding-left: 8px;
+  list-style: none;
+  margin-left: 24px;
+}
+
+.release-list-item::before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: #3b82f6;
+  border-radius: 50%;
+}
+
+.release-paragraph {
+  margin: 8px 0;
+  color: #6b7280;
+}
+
 /* 功能特性 */
 .features-section {
   margin-bottom: 32px;
@@ -399,29 +469,26 @@
 .thanks-card {
   background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
   border: 2px solid #fbbf24;
-  border-radius: 16px;
-  padding: 32px;
+  border-radius: 12px;
+  padding: 16px 24px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.2);
-}
-
-.thanks-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
-}
-
-.thanks-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #92400e;
-  margin: 0 0 12px 0;
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.2);
+  margin-bottom: 24px;
 }
 
 .thanks-text {
-  font-size: 16px;
+  font-size: 13px;
   color: #78350f;
-  margin: 0 0 20px 0;
-  line-height: 1.6;
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+}
+
+.thanks-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .thanks-contact {
@@ -435,5 +502,46 @@
   font-weight: 600;
   color: #92400e;
   border: 1px solid rgba(146, 64, 14, 0.2);
+}
+
+/* GitHub 链接 */
+.github-link-footer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #92400e;
+  border: 1px solid rgba(146, 64, 14, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.github-link-footer:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 8px rgba(146, 64, 14, 0.2);
+}
+
+.github-link-footer:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(146, 64, 14, 0.15);
+}
+
+.github-link-footer .github-icon {
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+
+.github-link-footer:hover .github-icon {
+  transform: scale(1.1);
+}
+
+.github-link-footer .github-text {
+  letter-spacing: 0.5px;
 }
 

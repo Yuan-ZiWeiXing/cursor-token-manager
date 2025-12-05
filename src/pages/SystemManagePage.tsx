@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react'
 import '../styles/SystemManagePage.css'
 import packageJson from '../../package.json'
 
@@ -10,36 +11,105 @@ interface SystemManagePageProps {
   }
 }
 
+interface GitHubRelease {
+  tag_name: string
+  name: string
+  body: string
+  published_at: string
+  html_url: string
+}
+
 const SystemManagePage: React.FC<SystemManagePageProps> = ({ updateInfo }) => {
+  const [releaseNotes, setReleaseNotes] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(true)
+
   const handleDownloadUpdate = () => {
     if (updateInfo?.releaseUrl) {
       window.open(updateInfo.releaseUrl, '_blank')
     }
   }
+
+  // 打开 GitHub 仓库
+  const handleOpenGitHub = () => {
+    const repoUrl = packageJson.repository?.url || packageJson.homepage
+    if (repoUrl) {
+      window.open(repoUrl, '_blank')
+    }
+  }
+
   const version = `v${packageJson.version}`
   const releaseDate = packageJson.releaseDate ?? ''
-  
-  const updateLogs = [
-    {
-      version,
-      date: releaseDate,
-      type: 'major',
-      updates: [
-        '🎉 首个正式版本发布',
-        '✨ 支持添加和管理 Cursor 账号令牌',
-        '🔄 支持同步本地 Cursor 账号',
-        '📊 实时查看账号用量统计',
-        '🔀 一键切换账号功能',
-        '⚡ 批量刷新用量信息',
-        '🗑️ 清理 Free 账号功能',
-        '🔧 重置机器码和清理历史会话',
-        '🎨 现代化的 macOS 风格界面设计',
-        '📋 支持长效 Token 和 Cookies 两种格式',
-        '❓ 内置常见问题解答',
-        '🏠 主页数据统计展示'
-      ]
+
+  // 从 GitHub API 获取 release notes
+  useEffect(() => {
+    const fetchReleaseNotes = async () => {
+      try {
+        setLoading(true)
+        const owner = packageJson.publish?.[0]?.owner || 'Denny-Yuan'
+        const repo = packageJson.publish?.[0]?.repo || 'cursor-token-manager'
+        const apiUrl = `https://api.github.com/repos/${owner}/${repo}/releases/tags/${version}`
+        
+        const response = await fetch(apiUrl)
+        if (response.ok) {
+          const data: GitHubRelease = await response.json()
+          setReleaseNotes(data.body || '暂无更新说明')
+        } else {
+          // 如果获取失败，使用默认更新日志
+          setReleaseNotes(getDefaultReleaseNotes())
+        }
+      } catch (error) {
+        console.error('获取 Release Notes 失败:', error)
+        setReleaseNotes(getDefaultReleaseNotes())
+      } finally {
+        setLoading(false)
+      }
     }
-  ]
+
+    fetchReleaseNotes()
+  }, [version])
+
+  // 默认更新日志（作为后备）
+  const getDefaultReleaseNotes = () => {
+    return `## 🎉 首个正式版本发布
+
+### ✨ 核心功能
+- 支持添加和管理 Cursor 账号令牌
+- 支持同步本地 Cursor 账号
+- 实时查看账号用量统计
+- 一键切换账号功能
+- 批量刷新用量信息
+- 清理 Free 账号功能
+
+### 🔧 高级工具
+- 重置机器码
+- 清理历史会话
+
+### 🎨 界面设计
+- 现代化的 macOS 风格界面设计
+- 支持长效 Token 和 Cookies 两种格式
+- 内置常见问题解答
+- 主页数据统计展示`
+  }
+
+  // 格式化 markdown 为 React 元素
+  const formatReleaseNotes = (markdown: string) => {
+    const lines = markdown.split('\n')
+    const elements: JSX.Element[] = []
+    
+    lines.forEach((line, index) => {
+      if (line.startsWith('## ')) {
+        elements.push(<h3 key={index} className="release-heading-2">{line.replace('## ', '')}</h3>)
+      } else if (line.startsWith('### ')) {
+        elements.push(<h4 key={index} className="release-heading-3">{line.replace('### ', '')}</h4>)
+      } else if (line.startsWith('- ')) {
+        elements.push(<li key={index} className="release-list-item">{line.replace('- ', '')}</li>)
+      } else if (line.trim()) {
+        elements.push(<p key={index} className="release-paragraph">{line}</p>)
+      }
+    })
+    
+    return elements
+  }
 
   return (
     <div className="system-manage-page">
@@ -51,6 +121,22 @@ const SystemManagePage: React.FC<SystemManagePageProps> = ({ updateInfo }) => {
       </div>
 
       <div className="page-content">
+        {/* 感谢卡片 - 最上方 */}
+        <div className="thanks-card">
+          <p className="thanks-text">
+            感谢您使用 Yuan-cursor账号管理器！如觉得好用，请给可怜的作者一个 Star ⭐ 吧~
+          </p>
+          <div className="thanks-footer">
+            <div className="thanks-contact">
+              <span>📧 联系方式：Q：1400700713</span>
+            </div>
+            <div className="github-link-footer" onClick={handleOpenGitHub} title="访问 GitHub 仓库给个 Star">
+              <span className="github-icon">⭐</span>
+              <span className="github-text">GitHub 仓库</span>
+            </div>
+          </div>
+        </div>
+
         {/* 更新提示横幅 */}
         {updateInfo?.hasUpdate && (
           <div className="update-banner">
@@ -69,7 +155,35 @@ const SystemManagePage: React.FC<SystemManagePageProps> = ({ updateInfo }) => {
           </div>
         )}
 
-        {/* 系统信息卡片 */}
+        {/* 更新日志 - 从 GitHub 获取 */}
+        <div className="update-logs-section">
+          <h3 className="section-title">📝 更新日志</h3>
+          
+          <div className="update-log-card update-major">
+            <div className="log-header">
+              <div className="log-version">
+                <span className="version-number">{version}</span>
+                <span className="version-type type-major">当前版本</span>
+              </div>
+              <span className="log-date">{releaseDate}</span>
+            </div>
+            
+            <div className="log-content">
+              {loading ? (
+                <div className="loading-release">
+                  <div className="loading-spinner">⏳</div>
+                  <p>正在从 GitHub 加载更新日志...</p>
+                </div>
+              ) : (
+                <div className="release-notes">
+                  {formatReleaseNotes(releaseNotes)}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* 系统信息卡片 - 移到更新日志下方 */}
         <div className="system-info-card">
           <div className="info-header">
             <div className="app-logo">
@@ -117,35 +231,6 @@ const SystemManagePage: React.FC<SystemManagePageProps> = ({ updateInfo }) => {
           </div>
         </div>
 
-        {/* 更新日志 */}
-        <div className="update-logs-section">
-          <h3 className="section-title">📝 更新日志</h3>
-          
-          {updateLogs.map((log, index) => (
-            <div key={index} className={`update-log-card update-${log.type}`}>
-              <div className="log-header">
-                <div className="log-version">
-                  <span className="version-number">{log.version}</span>
-                  <span className={`version-type type-${log.type}`}>
-                    {log.type === 'major' && '重大更新'}
-                    {log.type === 'minor' && '功能更新'}
-                    {log.type === 'patch' && '修复更新'}
-                  </span>
-                </div>
-                <span className="log-date">{log.date}</span>
-              </div>
-              
-              <div className="log-content">
-                <ul className="update-list">
-                  {log.updates.map((update, idx) => (
-                    <li key={idx}>{update}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* 功能特性 */}
         <div className="features-section">
           <h3 className="section-title">✨ 核心功能</h3>
@@ -186,18 +271,6 @@ const SystemManagePage: React.FC<SystemManagePageProps> = ({ updateInfo }) => {
               <h4 className="feature-title">高级工具</h4>
               <p className="feature-desc">重置机器码、清理历史会话等工具</p>
             </div>
-          </div>
-        </div>
-
-        {/* 感谢卡片 */}
-        <div className="thanks-card">
-          <div className="thanks-icon">💝</div>
-          <h3 className="thanks-title">感谢使用</h3>
-          <p className="thanks-text">
-            感谢您使用 Yuan-cursor账号管理器！如有任何问题或建议，欢迎联系开发者。
-          </p>
-          <div className="thanks-contact">
-            <span>📧 联系方式：Q：1400700713</span>
           </div>
         </div>
       </div>

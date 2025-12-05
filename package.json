@@ -1,8 +1,13 @@
 {
   "name": "yuan-cursor-manager",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "releaseDate": "2025-12-05",
   "description": "Yuan-cursor账号管理器",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Denny-Yuan/cursor-token-manager"
+  },
+  "homepage": "https://github.com/Denny-Yuan/cursor-token-manager",
   "main": "dist-electron/main.js",
   "type": "module",
   "scripts": {
@@ -36,7 +41,8 @@
   },
   "build": {
     "appId": "com.yuan.cursor-manager",
-    "productName": "Yuan-cursor账号管理器",
+    "productName": "yuan-cursor-manager",
+    "artifactName": "${productName}-setup-${version}.${ext}",
     "directories": {
       "output": "release"
     },
@@ -69,7 +75,8 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "Yuan-cursor账号管理器"
+      "shortcutName": "Yuan-cursor账号管理器",
+      "artifactName": "${productName}-setup-${version}.${ext}"
     },
     "mac": {
       "target": [
