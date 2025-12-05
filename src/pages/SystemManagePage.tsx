@@ -1,4 +1,5 @@
 import '../styles/SystemManagePage.css'
+import packageJson from '../../package.json'
 
 interface SystemManagePageProps {
   updateInfo?: {
@@ -15,13 +16,13 @@ const SystemManagePage: React.FC<SystemManagePageProps> = ({ updateInfo }) => {
       window.open(updateInfo.releaseUrl, '_blank')
     }
   }
-  const version = 'v1.0.0'
-  const releaseDate = '2025-12-05'
+  const version = `v${packageJson.version}`
+  const releaseDate = packageJson.releaseDate ?? ''
   
   const updateLogs = [
     {
-      version: 'v1.0.0',
-      date: '2025-12-05',
+      version,
+      date: releaseDate,
       type: 'major',
       updates: [
         '🎉 首个正式版本发布',
@@ -59,7 +60,7 @@ const SystemManagePage: React.FC<SystemManagePageProps> = ({ updateInfo }) => {
                 发现新版本 {updateInfo.latestVersion}
               </div>
               <div className="update-banner-desc">
-                当前版本 v1.0.0 · 点击下载最新版本获取更多功能和修复
+                当前版本 {version} · 点击下载最新版本获取更多功能和修复
               </div>
             </div>
             <button className="update-banner-button" onClick={handleDownloadUpdate}>

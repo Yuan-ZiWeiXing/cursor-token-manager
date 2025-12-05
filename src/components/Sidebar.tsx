@@ -1,4 +1,5 @@
 import '../styles/Sidebar.css'
+import packageJson from '../../package.json'
 
 interface SidebarProps {
   currentPage: 'home' | 'accounts' | 'settings' | 'faq' | 'system'
@@ -17,6 +18,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange, tokensCoun
       window.open(updateInfo.releaseUrl, '_blank')
     }
   }
+  const version = `v${packageJson.version}`
   return (
     <div className="sidebar-container">
       <div className="sidebar-header">
@@ -85,7 +87,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onPageChange, tokensCoun
               </div>
             </div>
           ) : (
-            <div className="sidebar-version">v1.0.0</div>
+            <div className="sidebar-version">{version}</div>
           )}
         </div>
       </nav>
