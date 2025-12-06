@@ -1,0 +1,43 @@
+{
+  "contributors": [
+    {
+      "name": "Yuan-ziweixing",
+      "avatar": "https://avatars.githubusercontent.com/u/211626770?s=400&u=df7cc45d87467365ae69c82f9c1ca54ace128e18&v=4",
+      "role": "项目作者,Q:1400700713",
+      "description": "项目创建者和主要开发者",
+      "link": "https://github.com/Yuan-ZiWeiXing"
+    },
+    {
+      "name": "L",
+      "avatar": "",
+      "role": "Q：1021162673",
+      "description": "为工具提供完善的添加账号思路，适配更多格式",
+      "link": ""
+    },
+    {
+      "name": "川",
+      "avatar": "",
+      "role": "Q：285559761",
+      "description": "为本工具提供账号校验功能",
+      "link": ""
+    }
+  ],
+  "technologies": [
+    {
+      "name": "Electron",
+      "description": "跨平台桌面应用框架"
+    },
+    {
+      "name": "React",
+      "description": "用户界面构建库"
+    },
+    {
+      "name": "TypeScript",
+      "description": "类型安全的 JavaScript"
+    },
+    {
+      "name": "Vite",
+      "description": "下一代前端构建工具"
+    }
+  ]
+}
