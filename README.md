@@ -4,7 +4,7 @@
 
 ## 📥 下载安装
 
-前往 [Releases](https://github.com/yuaotian/go-cursor-help/releases) 页面下载最新版本，根据你的系统选择对应的安装包：
+前往 [Releases](https://github.com/Yuan-ZiWeiXing/cursor-token-manager/releases) 页面下载最新版本，根据你的系统选择对应的安装包：
 
 ### 📦 安装包对照表
 
